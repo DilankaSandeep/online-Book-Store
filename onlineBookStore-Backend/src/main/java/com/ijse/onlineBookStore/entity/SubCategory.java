@@ -1,7 +1,5 @@
 package com.ijse.onlineBookStore.entity;
 
-
-
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -15,20 +13,17 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="categories")
-public class Category {
+@Table(name = "subCategories")
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoryId;
+    private long subCategoryId;
 
-    @Column(nullable=false)
-    private String categoryName;
+    @Column(nullable = false)
+    private String subCategoryName;
 
     @Column
-    private String categoryDescription;
-
-    @OneToMany(mappedBy = "category")
+    private String subCategoryDescription;
+    @OneToMany(mappedBy = "subCategory")
     private List<Book> books;
-
-
 }
