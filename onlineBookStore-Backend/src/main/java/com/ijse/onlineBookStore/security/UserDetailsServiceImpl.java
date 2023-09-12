@@ -16,7 +16,7 @@ import com.ijse.onlineBookStore.repository.UserRepository;
 
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -24,14 +24,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findByUserName(username).orElse(null);
 
         if(user == null) {
             throw new UsernameNotFoundException("No user with this user name");
         }
 
         return org.springframework.security.core.userdetails.User.builder()
-            .username(user.getName())
+            .username(user.getUserName())
             .password(user.getPassword())
             .build();
     }
