@@ -18,8 +18,20 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createBook(Book book) {
+      //  validateBook(book);
         return bookRepository.save(book);
     }
+
+    // private boolean validateBook(Book book) {
+
+    //     List<Book> allBooks = getAllBooks();
+    //     for (Book book2 : allBooks) {
+    //         if(book2.getTitle().equals(book.getTitle())&& (book2.getAuthor().equals(book.getAuthor()))&& book2.getPrice()==book.getPrice()){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     @Override
     public Book updateBook(Long id, Book book) {

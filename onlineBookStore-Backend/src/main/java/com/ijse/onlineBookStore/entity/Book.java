@@ -1,5 +1,7 @@
 package com.ijse.onlineBookStore.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,10 +26,13 @@ public class Book {
     private String author;
 
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private int qnty;
 
 
     @ManyToOne
