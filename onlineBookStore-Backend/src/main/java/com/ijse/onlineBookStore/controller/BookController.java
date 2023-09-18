@@ -3,7 +3,6 @@ package com.ijse.onlineBookStore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,12 +25,12 @@ public class BookController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/books")
+    @GetMapping("/open/books")
     public ResponseEntity<List<Book>> getAllBooks(){
         List<Book> allBooks = bookService.getAllBooks();
         return new ResponseEntity<>(allBooks, HttpStatus.OK);
     }
-    @GetMapping("books/{id}")
+    @GetMapping("/open/books/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id){
         Book book=bookService.getBookById(id);
         return new ResponseEntity<Book>(book,HttpStatus.OK);
