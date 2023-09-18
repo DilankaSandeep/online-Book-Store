@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import '../App.scss'
 
 
 
@@ -39,8 +40,10 @@ const Layout=()=>{
               <NavDropdown.Item href="#action5">Novels</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#sdaf">About Us</Nav.Link>
+            <Nav.Link href="#alog in" id="login">LOG IN/SIGN UP  </Nav.Link>
             <Nav.Link href="#Actoion"><img src={require("../imges/cart-icon-28356.png")} width="35" height="35" alt="BookLand Logo"/></Nav.Link>
           </Nav>
+
           <Form className="d-flex">
             <Form.Control
               type="search"
@@ -50,6 +53,7 @@ const Layout=()=>{
             />
             <Button variant="outline-success">Search</Button>
           </Form>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -61,9 +65,20 @@ const Layout=()=>{
 
 
             <footer className="bg-body-tertiary py-3">
-                <Container>
-                    This is the footer
+                <Container  fluid >
+                  <div className="footer">
+                  <p>Buy books online from anywhere in the world</p>
+                  <p>Signup To Be The First To Hear About Exclusive Deals, Special Offers And Upcoming Collections</p>
+                  <Button variant="info">Back to Home Page</Button>
+                  </div>
+                  <div className="followus">
+                    <p className="m-4">Follow Us</p>
+                    <Nav.Link href="#facebook"><img src={require("../imges/fbplusinsta.png")} width="120" height="60" /></Nav.Link> 
+                    {/* <Nav.Link href="#instagram"><img src={require("../imges/insta.jpeg")} width="65" height="55" /></Nav.Link>  */}
+                    
+                  </div>
                 </Container>
+                
             </footer>
         </div>
     )
