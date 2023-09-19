@@ -23,7 +23,6 @@ import com.ijse.onlineBookStore.security.jwt.JwtUtills;
 
 @RestController
 @CrossOrigin(origins = "*")
-
 public class AuthController {
     
     @Autowired

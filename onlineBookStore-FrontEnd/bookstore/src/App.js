@@ -6,6 +6,7 @@ import { useLayoutEffect } from 'react';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import User from './pages/User';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Home />} />
+          <Route path='/User' element={<User/>}/>
         </Route>
 
       </Routes>

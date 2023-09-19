@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -24,6 +26,12 @@ public class SubCategory {
 
     @Column
     private String subCategoryDescription;
-    @OneToMany(mappedBy = "subCategory")
-    private List<Book> books;
-}
+
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=false, referencedColumnName="category_id")
+    private Category category;
+
+    
+//     @OneToMany(mappedBy = "subCategory")
+//     private List<Book> books;
+ }

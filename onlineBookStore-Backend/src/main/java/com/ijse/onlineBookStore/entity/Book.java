@@ -26,7 +26,7 @@ public class Book {
     private String author;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private double price;
 
     @Column(nullable = false)
     private String description;
@@ -34,9 +34,12 @@ public class Book {
     @Column(nullable = false)
     private int qnty;
 
+    @Column(nullable=true)
+    private String imageUrl;
+
 
     @ManyToOne
-    @JoinColumn(name="category_id",nullable = false)
+    @JoinColumn(name="category_id",nullable = false,referencedColumnName ="category_id")
     private Category category;
 
     @ManyToOne

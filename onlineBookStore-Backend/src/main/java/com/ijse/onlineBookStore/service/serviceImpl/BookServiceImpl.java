@@ -9,7 +9,6 @@ import com.ijse.onlineBookStore.entity.Book;
 import com.ijse.onlineBookStore.entity.Category;
 import com.ijse.onlineBookStore.entity.SubCategory;
 import com.ijse.onlineBookStore.repository.BookRepository;
-import com.ijse.onlineBookStore.repository.SubCategoryRepository;
 import com.ijse.onlineBookStore.service.BookService;
 @Service
 public class BookServiceImpl implements BookService {
@@ -61,7 +60,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooksBySubCategory(SubCategory subCategory) {
-        return subCategory.getBooks();
+        return bookRepository.findBySubCategory(subCategory);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooksByCategory(Category category) {
-        return category.getBooks();
+        return bookRepository.findByCategory(category);
     }
     
 }

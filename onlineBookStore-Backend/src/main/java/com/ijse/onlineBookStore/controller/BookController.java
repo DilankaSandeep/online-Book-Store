@@ -36,7 +36,7 @@ public class BookController {
         return new ResponseEntity<Book>(book,HttpStatus.OK);
     }
 
-    @GetMapping("books/categories/{id}")
+    @GetMapping("/open/books/categories/{id}")
     public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Long id){
         Category category = categoryService.getCategoryById(id);
         List<Book> bookListByCategory= bookService.getBooksByCategory(category);
