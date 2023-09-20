@@ -10,8 +10,6 @@ const Fiction= ()=>{
     const [books, setbooks] = useState(null);
     const [order, setOrder] = useState([]);
     const [total, setTotal] = useState(null);
-    const categoryId =2;
-
 
     useEffect(()=>{
         const fetchByCategoery=async ()=>{

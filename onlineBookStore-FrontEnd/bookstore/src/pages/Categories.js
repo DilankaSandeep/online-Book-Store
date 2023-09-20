@@ -20,7 +20,7 @@ const Categories = () => {
             <Tab eventKey="fiction" title="Fiction" className='tab'>
                 <div>
                     <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                        <ListGroup.Item action href="/">
                             Science Fiction
                         </ListGroup.Item>
                         <ListGroup.Item action href="#link2" >
