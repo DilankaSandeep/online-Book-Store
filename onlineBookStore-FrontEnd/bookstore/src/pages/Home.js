@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container";
 import { Row, Col, Button, Table, Modal, Form } from 'react-bootstrap';
 import { getRequest, postRequest } from "../services/ApiService";
 
-const userId = sessionStorage.getItem('userId');
+// const userId = sessionStorage.getItem('userId');
 
 const Home = () => {
 
@@ -49,8 +49,8 @@ const Home = () => {
 
   return (
     <>
-      {user &&
-        <div>{user.userName}</div>}
+      {/* {user &&
+        <div>{user.userName}</div>} */}
       <Row className="justify-content-md-center">
         {books && books.map((book) => {
           return (

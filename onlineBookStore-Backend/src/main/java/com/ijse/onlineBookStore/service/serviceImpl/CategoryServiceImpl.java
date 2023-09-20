@@ -1,5 +1,7 @@
 package com.ijse.onlineBookStore.service.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+       return categoryRepository.findAll();
     }
     
 }

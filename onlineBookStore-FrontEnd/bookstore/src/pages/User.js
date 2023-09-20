@@ -26,7 +26,7 @@ const User = () => {
     const handleUsername = (event) => {
         setUsername(event.target.value);
 
-        if (username.length <= 5) {
+        if (username.length <= 4) {
             setRegisterEnabled(false);
         } else {
             setRegisterEnabled(true);
@@ -67,8 +67,12 @@ const User = () => {
         try {
             const response = await axios.post('http://localhost:9001/open/register', data);
             navigate("/User");
-            window.alert("please log in")
             setError("");
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            window.alert("Succesfully Registered. Please Log In")
+    
         } catch (error) {
             setError(error.response.data.message);
             window.alert(error.message);

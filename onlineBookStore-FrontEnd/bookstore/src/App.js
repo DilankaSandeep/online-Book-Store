@@ -7,6 +7,9 @@ import Layout from './pages/Layout';
 import Home from './pages/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import User from './pages/User';
+import Fiction from './pages/Fiction';
+import SchoolBook from './pages/School';
+import Categories from './pages/Categories';
 
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Home />} />
           <Route path='/User' element={<User/>}/>
+          <Route path='/Fiction'element={<Fiction/>}/>
+          <Route path='/SchoolBook'element={<SchoolBook/>}/>
+          <Route path='/Categories'element={<Categories/>}/>
         </Route>
 
       </Routes>

@@ -6,10 +6,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../App.scss'
+import Home from "./Home";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Layout=()=>{
+  const navigate = useNavigate();
+
+  const handleBacktoHome=()=>{
+    navigate("/")
+  }
     return(
         <div>
 
@@ -25,10 +32,10 @@ const Layout=()=>{
             navbarScroll
           >
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#action2">All Categories</Nav.Link>
+            <Nav.Link href="/Categories">All Categories</Nav.Link>
             <NavDropdown title="Categories" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Fiction</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">School Books</NavDropdown.Item>
+              <NavDropdown.Item href="/fiction">Fiction</NavDropdown.Item>
+              <NavDropdown.Item href="/SchoolBook">School Books</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Children's Books</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Science & Technology</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Religion & Spirituality</NavDropdown.Item>
@@ -69,7 +76,7 @@ const Layout=()=>{
                   <div className="footer">
                   <p>Buy books online from anywhere in the world</p>
                   <p>Signup To Be The First To Hear About Exclusive Deals, Special Offers And Upcoming Collections</p>
-                  <Button variant="info">Back to Home Page</Button>
+                  <Button variant="info" onClick={handleBacktoHome}>Back to Home Page</Button>
                   </div>
                   <div className="followus">
                     <p className="m-4">Follow Us</p>
