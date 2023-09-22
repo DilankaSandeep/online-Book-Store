@@ -34,17 +34,17 @@ const Layout=()=>{
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/Categories">All Categories</Nav.Link>
             <NavDropdown title="Categories" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/fiction">Fiction</NavDropdown.Item>
+              <NavDropdown.Item href="/Fiction">Fiction</NavDropdown.Item>
               <NavDropdown.Item href="/SchoolBook">School Books</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Children's Books</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Science & Technology</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Religion & Spirituality</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Cook Books and Food</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Health & Fitness</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Business & Economics</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Art</NavDropdown.Item>
+              <NavDropdown.Item href="/ChildernsBook">Children's Books</NavDropdown.Item>
+              <NavDropdown.Item href="/Science&Tecnology">Science & Technology</NavDropdown.Item>
+              <NavDropdown.Item href="/Religous&Spiritiality">Religion & Spirituality</NavDropdown.Item>
+              <NavDropdown.Item href="/CookBook">Cook Books and Food</NavDropdown.Item>
+              <NavDropdown.Item href="/Health&Fitness">Health & Fitness</NavDropdown.Item>
+              <NavDropdown.Item href="/Business">Business & Economics</NavDropdown.Item>
+              <NavDropdown.Item href="/Arts">Art</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Novels</NavDropdown.Item>
+              <NavDropdown.Item href="/Novels">Novels</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#sdaf">About Us</Nav.Link>
             <Nav.Link href="/User" id="login">LOG IN/SIGN UP  </Nav.Link>

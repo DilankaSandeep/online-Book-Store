@@ -25,7 +25,7 @@ export const fetchBooksByCategoery= async (category_id)=>{
 export const fetchBook= async (book_id)=>{
     try {
         const response= await axios.get("http://localhost:9001/open/books/"+book_id); 
-        console.log(response);
+        console.log(response.data);
 
         return await response.data;
     } catch (error) {

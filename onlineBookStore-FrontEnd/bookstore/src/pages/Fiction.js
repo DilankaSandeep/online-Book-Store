@@ -5,15 +5,16 @@ import { Row, Col, Button, Table, Modal, Form } from 'react-bootstrap';
 import { getRequest, postRequest } from "../services/ApiService";
 import axios from "axios";
 
-const Fiction= ()=>{
+const BooksByCatrgories= (props)=>{
 
     const [books, setbooks] = useState(null);
     const [order, setOrder] = useState([]);
     const [total, setTotal] = useState(null);
+    const categoryId= props.value;
 
     useEffect(()=>{
         const fetchByCategoery=async ()=>{
-            const response= await fetchBooksByCategoery("2");
+            const response= await fetchBooksByCategoery(categoryId);
             setbooks(response);
         }
         fetchByCategoery();
@@ -54,4 +55,4 @@ const Fiction= ()=>{
       </> 
     )
 }
-export default Fiction;
+export default BooksByCatrgories;

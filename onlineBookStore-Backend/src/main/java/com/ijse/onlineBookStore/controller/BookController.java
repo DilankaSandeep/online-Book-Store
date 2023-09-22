@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ijse.onlineBookStore.entity.Book;
 import com.ijse.onlineBookStore.entity.Category;
+import com.ijse.onlineBookStore.entity.SubCategory;
 import com.ijse.onlineBookStore.service.BookService;
 import com.ijse.onlineBookStore.service.CategoryService;
+import com.ijse.onlineBookStore.service.SubCategoryService;
 
 
 @CrossOrigin(origins="*")
@@ -24,6 +26,9 @@ public class BookController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    SubCategoryService subCategoryService;
 
     @GetMapping("/open/books")
     public ResponseEntity<List<Book>> getAllBooks(){
@@ -41,6 +46,12 @@ public class BookController {
         Category category = categoryService.getCategoryById(id);
         List<Book> bookListByCategory= bookService.getBooksByCategory(category);
         return new ResponseEntity<List<Book>>(bookListByCategory, HttpStatus.OK);
+    }
+        @GetMapping("/open/books/subcategories/{id}")
+    public ResponseEntity<List<Book>> getBooksBySubCategory(@PathVariable Long id){
+        SubCategory subCategory = subCategoryService.getSubCategoryById(id);
+        List<Book> bookListBySubCategory= bookService.getBooksBySubCategory(subCategory);
+        return new ResponseEntity<List<Book>>(bookListBySubCategory, HttpStatus.OK);
     }
 
 }
