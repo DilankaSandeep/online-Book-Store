@@ -19,11 +19,11 @@ const Categories = () => {
         >
             <Tab eventKey="fiction" title="Fiction" className='tab'>
                 <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="/">
+                    <ListGroup defaultActiveKey="/Fiction">
+                        <ListGroup.Item action href="/Fiction/ScienceFic">
                             Science Fiction
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/Fiction/NonScienceFic" >
                            Non Science Fiction
                         </ListGroup.Item>
                     </ListGroup>
@@ -31,14 +31,14 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="school" title="School Book" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/School/primary">
+                        <ListGroup.Item action href="/School/primary">
                             Grade one to Five
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/School/OL" >
                            Grade six to Eleven(O/L)
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" >
+                        <ListGroup.Item action href="/School/AL" >
                            Grade Twevel to Thriteen (A/L)
                         </ListGroup.Item>
                     </ListGroup>
@@ -46,14 +46,14 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="childerns" title="Childeren's Book" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/ChildernsBook/Picture">
+                        <ListGroup.Item action href="/ChildernsBook/Picture">
                             Picture Books
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/ChildernsBook/EarlyReaders" >
                            Eraly Readers
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" >
+                        <ListGroup.Item action href="/ChildernsBook/MiddleGrade" >
                            Middle Grade
                         </ListGroup.Item>
                     </ListGroup>
@@ -61,11 +61,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="science" title="Science and Tecnolgy" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/Science&Tec/Science">
+                        <ListGroup.Item action href="/Science&Tec/Science">
                             Science
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/Science&Tec/Tecnology" >
                            Tecnolgy
                         </ListGroup.Item>
                     </ListGroup>
@@ -73,11 +73,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="religious" title="Religious and Spirituality" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/R&S/S">
+                        <ListGroup.Item action href="/R&S/R">
                             Religious
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/R&S/S" >
                            Spiritual
                         </ListGroup.Item>
                     </ListGroup>
@@ -85,11 +85,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="cookBook" title="Cook Books and Foods" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/C&F/C">
+                        <ListGroup.Item action href="/C&F/C">
                             Cook Books
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/C&F/F" >
                            Foods
                         </ListGroup.Item>
                     </ListGroup>
@@ -97,11 +97,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="health" title="Health and Fitness" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/H&F/H">
+                        <ListGroup.Item action href="/H&F/H">
                             Health
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/H&F/F" >
                            Fitness and Sport
                         </ListGroup.Item>
                     </ListGroup>
@@ -109,11 +109,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="art" title="Art" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/Art/G">
+                        <ListGroup.Item action href="/Art/G">
                             Art Guides
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/Art/P" >
                            Photography
                         </ListGroup.Item>
                     </ListGroup>
@@ -121,11 +121,11 @@ const Categories = () => {
             </Tab>
             <Tab eventKey="novels" title="Novels" className='tab'>
             <div>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action href="#link1">
+                    <ListGroup defaultActiveKey="/Novel/AT">
+                        <ListGroup.Item action href="/Novel/AT">
                             Adventure and Travel
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" >
+                        <ListGroup.Item action href="/Novel/H" >
                            Horror
                         </ListGroup.Item>
                     </ListGroup>

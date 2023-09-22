@@ -46,7 +46,7 @@ const Layout=()=>{
               <NavDropdown.Divider />
               <NavDropdown.Item href="/Novels">Novels</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#sdaf">About Us</Nav.Link>
+            <Nav.Link href="/AboutUs">About Us</Nav.Link>
             <Nav.Link href="/User" id="login">LOG IN/SIGN UP  </Nav.Link>
             <Nav.Link href="#Actoion"><img src={require("../imges/cart-icon-28356.png")} width="35" height="35" alt="BookLand Logo"/></Nav.Link>
           </Nav>
