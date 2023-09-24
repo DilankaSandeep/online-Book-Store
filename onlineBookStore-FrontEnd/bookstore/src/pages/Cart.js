@@ -3,12 +3,18 @@ import { useCart } from '../CartContex';
 import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
+import { createOrder } from '../services/CartService';
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const { removeFromCart } = useCart();
   const [total, setTotal] =useState(0);
   const [orderQuantities, setOrderQuantities] = useState({});
+  const[order,setOrder] = useState([]);
+  const [status, setStatus] = useState("");
+  const userId = sessionStorage.getItem('user_id');
   
   useEffect(() => {
     const cartTotal = cart.reduce((acc, item) => {
@@ -38,6 +44,22 @@ const Cart = () => {
         [itemId]: Math.max((prevOrderQuantities[itemId] || 0) - 1, 1), 
       }));
     };
+    //TODO
+    const placeOrder= async ()=>{
+      setOrder(cart);
+      const data = {
+        id: 5,
+        status: status,
+        user: {
+            id: userId,
+        },
+        items: order
+    }
+    const response= await createOrder(order);
+    {response && navigate("/")}
+    {!response && navigate("/User")}
+    }
+
 
 
   return (
@@ -79,7 +101,7 @@ const Cart = () => {
           </tr>
         </tbody>
       </Table>
-      <div className='plaseOrder'><Button variant='primary'>place Order</Button></div>
+      <div className='plaseOrder'><Button variant='primary' onClick={placeOrder}>place Order</Button></div>
     </div>
 
   );
