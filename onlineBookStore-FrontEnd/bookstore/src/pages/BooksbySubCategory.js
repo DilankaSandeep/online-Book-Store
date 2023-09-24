@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { fetchBooksByCategoery, fetchBooksBySubCategoery } from "../services/BookService";
+import {  fetchBooksBySubCategoery } from "../services/BookService";
 import { Row, Col, Button, Modal} from 'react-bootstrap';
 import { fetchBook, } from "../services/BookService";
+import { useCart } from "../CartContex";
 
 const BooksbySubCategory= (props)=>{
-
+  const { addToCart } =useCart();
     const [books, setbooks] = useState(null);
-    const [order, setOrder] = useState([]);
-    const [total, setTotal] = useState(null);
     const [bookdetail, setbookdetail] = useState(null);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-    const subCategoryId= props.value;
+  const subCategoryId= props.value;
 
     useEffect(()=>{
         const fetchBySubCategoery=async ()=>{
@@ -22,15 +21,6 @@ const BooksbySubCategory= (props)=>{
         }
         fetchBySubCategoery();
     },[])
-    const handleOrder = ((book) => {
-        const updatedCart = [...order, book]
-    
-        const updatedTotal = total + book.price;
-    
-        setOrder(updatedCart);
-        setTotal(updatedTotal);
-    
-      });
       const bookDetails = ((id) => {
         const getBook = async () => {
           const responsebook = await fetchBook(id);
@@ -41,9 +31,6 @@ const BooksbySubCategory= (props)=>{
         handleShow();
     
       });
-      const addtocart = () => {
-        handleOrder(bookdetail);
-      }
 
     return(
         <>
@@ -53,15 +40,15 @@ const BooksbySubCategory= (props)=>{
 
             return (
               <Col key={book.id}>
-                <div className="item">
-                  <h4>{book.title}</h4>
-                  <img src={require(`../imges/${book.imageUrl}`)} height={300} width={200} alt={book.title} />
-                  <h5>Author: {book.author}</h5>
-                  <p>Category: {book.category.categoryName}</p>
-                  <p>Sub Category: {book.subCategory.subCategoryName}</p>
-                  <p>Price Rs: {book.price}</p>
-                  <p>Available Quntity: {book.qnty}</p>
-                  <Button size="sm" id="bookDetails" onClick={() => {
+            <div className="item">
+              <h4>{book.title}</h4>
+              <img src={require(`../imges/${book.imageUrl}`)} height={300} width={200} alt={book.title} />
+              <h5>Author: {book.author}</h5>
+              <p>Category: {book.category.categoryName}</p>
+              <p>Sub Category: {book.subCategory.subCategoryName}</p>
+              <p>Price Rs: {book.price}</p>
+              <p>Available Quntity: {book.qnty}</p>
+              <Button size="sm" id="bookDetails" onClick={() => {
                 bookDetails(book.id);
               } }>More Deatils</Button>
               {bookdetail &&
@@ -84,15 +71,16 @@ const BooksbySubCategory= (props)=>{
                     <Button variant="secondary" onClick={handleClose}>
                       Close
                     </Button>
-                    <Button variant="primary" onClick={addtocart}>
+                    <Button variant="primary" onClick={()=>{addToCart(bookdetail)}}>
                       Add to Cart
                     </Button>
                   </Modal.Footer>
                 </Modal>}
-                  <Button size="sm" id="addtocartbutton" onClick={() => {
-                    handleOrder(book)
-                  }}>Add to Cart</Button>
-                </div>
+              <Button size="sm" id="addtocartbutton" onClick={() => {
+                addToCart(book)
+              } }>Add to Cart</Button>
+              
+            </div>
               </Col>
   
             )

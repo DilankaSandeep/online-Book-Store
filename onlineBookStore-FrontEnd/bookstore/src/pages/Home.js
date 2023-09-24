@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchBook, fetchBooks } from "../services/BookService";
 import { Row, Col, Button, Modal } from 'react-bootstrap';
+import { useCart } from "../CartContex";
 
 
 
 const Home = () => {
-
-
+  const { addToCart } = useCart();
   const [books, setbooks] = useState(null);
-  const [order, setOrder] = useState([]);
-  const [total, setTotal] = useState(null);
   const [bookdetail, setbookdetail] = useState(null);
 
 
@@ -39,24 +37,14 @@ const Home = () => {
     handleShow();
 
   });
-  const handleOrder = ((book) => {
-    const updatedCart = [...order, book]
 
-    const updatedTotal = total + book.price;
-
-    setOrder(updatedCart);
-    setTotal(updatedTotal);
-
-  });
-  const addtocart = () => {
-    handleOrder(bookdetail);
-  }
 
   return (
     <>
 
       <Row className="justify-content-md-center">
         {books && books.map((book) => (
+          
           <Col key={book.id}>
             <div className="item">
               <h4>{book.title}</h4>
@@ -89,14 +77,15 @@ const Home = () => {
                     <Button variant="secondary" onClick={handleClose}>
                       Close
                     </Button>
-                    <Button variant="primary" onClick={addtocart}>
+                    <Button variant="primary" onClick={()=>{addToCart(bookdetail)}}>
                       Add to Cart
                     </Button>
                   </Modal.Footer>
                 </Modal>}
               <Button size="sm" id="addtocartbutton" onClick={() => {
-                handleOrder(book);
+                addToCart(book)
               } }>Add to Cart</Button>
+              
             </div>
           </Col>
 
