@@ -48,7 +48,7 @@ const Home = () => {
           <Col key={book.id}>
             <div className="item">
               <h4>{book.title}</h4>
-              <img src={require(`../imges/${book.imageUrl}`)} height={300} width={200} alt={book.title} />
+              <img src={require(`../imges/${book.imageUrl}`)} height={275} width={175} alt={book.title} />
               <h5>Author: {book.author}</h5>
               <p>Category: {book.category.categoryName}</p>
               <p>Sub Category: {book.subCategory.subCategoryName}</p>
@@ -69,7 +69,7 @@ const Home = () => {
                     <p>Category Description: {bookdetail.category.categoryDescription}</p>
                     <p>Sub Category: {bookdetail.subCategory.subCategoryName}</p>
                     <p>Description: {bookdetail.description}</p>
-                    <p>Price Rs: {bookdetail.price}</p>
+                    <p>Price Rs: {bookdetail.price.toFixed(2)}</p>
                     <p>Available Quntity: {bookdetail.qnty}</p>
 
                   </Modal.Body>

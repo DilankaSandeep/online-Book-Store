@@ -50,8 +50,6 @@ public class Order {
     )
     private Set<Book> items = new HashSet<>();
 
-
-    //Get the system time on Order create and update
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
