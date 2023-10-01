@@ -15,10 +15,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Data;
+
 
 
 @Entity
@@ -41,14 +43,11 @@ public class Order {
     @JoinColumn(name = "user_id") //Foreign key of User Entity
     private User user;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<OrderItem> orderItems = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "order_items",
-        joinColumns = { @JoinColumn(name = "order_id")},
-        inverseJoinColumns = { @JoinColumn(name = "item_id") }
-    )
-    private Set<Book> items = new HashSet<>();
+    @Column(nullable = false)
+    private double orderTotal;
 
     @PrePersist
     protected void onCreate() {

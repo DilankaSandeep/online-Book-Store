@@ -11,6 +11,7 @@ import Books from './pages/Book';
 import BooksbySubCategory from './pages/BooksbySubCategory';
 import AboutUs from './pages/AboutUs';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/User' element={<User/>}/>
           <Route path='/AboutUs' element={<AboutUs />} />
           <Route path='/Cart' element={<Cart/>}/>
+          <Route path='/Checkout' element={<Checkout/>}/>
           <Route path='/Business'element={<Books value={1}/>}/>
           <Route path='/Fiction'element={<Books value={2}/>}/>
           <Route path='/SchoolBook'element={<Books value={3}/>}/>

@@ -14,6 +14,7 @@ const Cart = () => {
   const [orderQuantities, setOrderQuantities] = useState({});
   const[order,setOrder] = useState([]);
   const [status, setStatus] = useState("");
+  const [orderItems,setOrderItems]= useState([]);
   const userId = sessionStorage.getItem('user_id');
   
   useEffect(() => {
@@ -44,21 +45,52 @@ const Cart = () => {
         [itemId]: Math.max((prevOrderQuantities[itemId] || 0) - 1, 1), 
       }));
     };
-    //TODO
-    const placeOrder= async ()=>{
-      setOrder(cart);
+
+    const placeOrder = async () => {
+      setStatus("pending");
+       // Validate order quantities before placing the order
+    const isOrderValid = cart.every((item) => {
+      const orderedQuantity = orderQuantities[item.id] || 1;
+      return orderedQuantity <= item.qnty;
+    });
+
+    if (!isOrderValid) {
+      window.alert('Invalid order quantity for one or more items. Please check the available quanties and change order quanties accordingly');
+      return;
+    }
+      const orderItems = cart.map((item) => ({
+        book: {
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          category:item.category,
+          subCategory:item.subCategory,
+          imageUrl:item.imageUrl,
+          qnty: item.qnty,
+          
+        },
+        quantity: orderQuantities[item.id] || 1,
+      }));
+    
       const data = {
-        id: 5,
         status: status,
         user: {
-            id: userId,
+          id: 11,
         },
-        items: order
+        orderItems: orderItems,
+        orderTotal: total,
+      };
+    
+      const response = await createOrder(data);
+    
+      if (response) {
+        localStorage.setItem('order', JSON.stringify(response));
+        navigate("/Checkout");
+      } else {
+        navigate("/");
+      }
     }
-    const response= await createOrder(order);
-    {response && navigate("/")}
-    {!response && navigate("/User")}
-    }
+    
 
 
 
@@ -72,7 +104,7 @@ const Cart = () => {
             <th>Product</th>
             <th>Price</th>
             <th>Category</th>
-            <th>Quantity</th>
+            <th>Order Quantity</th>
             <th>Sub Total</th>
 
 
@@ -101,7 +133,7 @@ const Cart = () => {
           </tr>
         </tbody>
       </Table>
-      <div className='plaseOrder'><Button variant='primary' onClick={placeOrder}>place Order</Button></div>
+      <div className='plaseOrder'><Button variant='primary' onClick={placeOrder}>Checkout</Button></div>
     </div>
 
   );

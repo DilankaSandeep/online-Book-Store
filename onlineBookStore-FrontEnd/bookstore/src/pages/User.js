@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,19 @@ const User = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
+    const [logInError, setLogInError] = useState("");
     const [logInusername, setLogInUsername] = useState("");
     const [logInpassword, setLogInPassword] = useState("");
 
     const navigate = useNavigate();
+    useEffect(()=>{
+        setUsername("");
+        setPassword("");
+        setLogInPassword("");
+        setLogInUsername("");
+    },[]);
+
+
 
     const [registerEnabled, setRegisterEnabled] = useState(false);
     const handleLogInUsername = (event) => {
@@ -90,19 +99,22 @@ const User = () => {
 
         try {
             const response = await axios.post("http://localhost:9001/open/login", data);
-            setError("");
-            setUsername("");
-            setPassword("");
+            setLogInError("");
+            setError("")
+            setLogInUsername("")
+            setLogInPassword("")
 
             sessionStorage.setItem('token',response.data.token);
-            sessionStorage.setItem('username', response.data.username);
-            sessionStorage.setItem('userId',response.data.userId);
+            sessionStorage.setItem('username', response.data.userName);
+            sessionStorage.setItem('user_id',response.data.id);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            window.alert(`Loged In as ${response.data.userName}`)
 
             navigate("/");
 
+
         } catch (error) {
-            setError("Username or Password is wrong");
+            setLogInError("Username or Password is wrong");
         }
     }
 
@@ -161,7 +173,7 @@ const User = () => {
 
                         {error &&
                             <div className="text-danger mb-3">
-                                {error}
+                                {logInError}
                             </div>
                         }
 
