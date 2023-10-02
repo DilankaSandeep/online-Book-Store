@@ -12,6 +12,7 @@ import AboutUs from './pages/AboutUs';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import ShippingDetails from './pages/ShippingDetails';
+import ProtectedRoute from './utils/Protected';
 
 
 function App() {
@@ -23,8 +24,7 @@ function App() {
           <Route path='/User' element={<User/>}/>
           <Route path='/AboutUs' element={<AboutUs />} />
           <Route path='/Cart' element={<Cart/>}/>
-          <Route path='/Checkout' element={<Checkout/>}/>
-          <Route path='/ShippingDetails' element={<ShippingDetails/>}/>
+          
           <Route path='/Business'element={<Books value={1}/>}/>
           <Route path='/Fiction'element={<Books value={2}/>}/>
           <Route path='/SchoolBook'element={<Books value={3}/>}/>
@@ -56,7 +56,11 @@ function App() {
           <Route path='/Art/P' element={<BooksbySubCategory value={21}/>}/>
           <Route path='/Novel/AT' element={<BooksbySubCategory value={22}/>}/>
           <Route path='/Novel/H' element={<BooksbySubCategory value={23}/>}/>
-        </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path='/Checkout' element={<Checkout/>}/>
+          <Route path='/ShippingDetails' element={<ShippingDetails/>}/>
+            </Route>
+          </Route>
 
       </Routes>
     </BrowserRouter>

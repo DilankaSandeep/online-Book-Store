@@ -112,7 +112,9 @@ Placing an Order
 
     To place an order, make sure you're logged in.
     Go to the Cart page and adjust the quantity of books as needed.
-    Click the "Place Order" button to complete your purchase.
+    Click the "Checkout" button to complete your purchase.
+    Reivew and confirm the order or go back to cart to change the order. 
+    After confirm the order fill form for shipping deatils and complete the order placement.
 
 ### Version
 0.1.0

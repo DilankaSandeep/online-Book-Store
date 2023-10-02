@@ -6,7 +6,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../App.scss'
-import Home from "./Home";
 import { useNavigate } from "react-router-dom";
 
 
@@ -48,7 +47,7 @@ const Layout=()=>{
             </NavDropdown>
             <Nav.Link href="/AboutUs">About Us</Nav.Link>
             <Nav.Link href="/User" id="login">LOG IN/SIGN UP  </Nav.Link>
-            <Nav.Link href="/Cart"><img src={require("../imges/cart-icon-28356.png")} width="35" height="35" alt="BookLand Logo"/></Nav.Link>
+            <Nav.Link href="/Cart" className="carticon"><img src={require("../imges/cart-icon-28356.png")} width="35" height="35" alt="BookLand Logo"/></Nav.Link>
           </Nav>
 
           <Form className="d-flex">

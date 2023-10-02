@@ -5,6 +5,7 @@ import { fetchUser, fetchUsers } from "../services/UserService";
 import Table from 'react-bootstrap/Table';
 import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { updateBook } from "../services/BookService";
 
 
 //const userId = sessionStorage.getItem('user_id');
@@ -17,6 +18,9 @@ const Checkout = () => {
     const [order, setOrder] = useState(null);
     const [users, setUsers] = useState(null);
     const[username, setUsername] =useState(null);
+    const [orderItems,setOrderItems]= useState([]);
+    const [bookId,setBookId]= useState('');
+
     
     useEffect(()=>{
         setUsername(usernameformstorage);
@@ -34,11 +38,47 @@ const Checkout = () => {
 
         getOrder();
     }, [])
+    const updatebookStore = async () => {
+        const updatedBookIds = [];
+        const updatedOrderItems = orderItems.map((item) => {
+          const bookId = item.book.id;
+          const updatedQuantity = item.book.qnty - item.quantity;
+          updatedBookIds.push(bookId);
+      
+          return {
+            bookId: bookId,
+            updatedQuantity: updatedQuantity,
+          };
+        });
+      
+        // Use Promise.all to update all books concurrently
+        const updatePromises = updatedOrderItems.map(async (item) => {
+          const data = {
+            id: item.bookId,
+            qnty: item.updatedQuantity,
+          };
+      
+          return await updateBook(item.bookId, data);
+        });
+      
+        try {
+          await Promise.all(updatePromises);
+      
+          // All books updated successfully
+          // Now you can set the updatedOrderItems state or perform any other actions
+          setOrderItems(updatedOrderItems);
+        } catch (error) {
+          console.error("Error updating books:", error);
+          // Handle the error if needed
+        }
+      };
+      
 
 
     const confirmOrder =()=>{
         const updatedCart = [];
         localStorage.setItem('cart', JSON.stringify(updatedCart));
+        updatebookStore();
         navigate("/shippingDetails");
     }
 
@@ -93,23 +133,9 @@ const Checkout = () => {
                             <Button variant='primary' className='plaseOrder' onClick={confirmOrder}>confirm Order</Button>
                             </Container>
                
-                        </>
-
-
-                  
+                        </> 
             </div>}
 
-
-            {/* {users && users.map((userr)=>{
-            return(
-                <div>
-                {userr.userName}
-                {userr.email}
-               </div>
-            )
-
-               
-        })} */}
 
         </>
     )

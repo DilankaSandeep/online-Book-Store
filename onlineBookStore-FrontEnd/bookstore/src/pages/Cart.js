@@ -116,7 +116,7 @@ const Cart = () => {
   return (
     
     <div className="cart">
-    <h4>{user && user.userName}'s Cart</h4>
+    <h4>Your Cart</h4>
       <Table striped bordered hover>
         <thead>
           <tr>
