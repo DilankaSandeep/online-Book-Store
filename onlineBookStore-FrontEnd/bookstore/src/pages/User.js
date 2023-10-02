@@ -103,12 +103,12 @@ const User = () => {
             setError("")
             setLogInUsername("")
             setLogInPassword("")
-
+            localStorage.setItem('username', (logInusername));
             sessionStorage.setItem('token',response.data.token);
             sessionStorage.setItem('username', response.data.userName);
             sessionStorage.setItem('user_id',response.data.id);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-            window.alert(`Loged In as ${response.data.userName}`)
+            window.alert(`Loged In as ${logInusername}`)
 
             navigate("/");
 

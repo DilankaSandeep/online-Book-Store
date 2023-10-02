@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import { createOrder } from '../services/CartService';
 import { useNavigate } from "react-router-dom";
+import { fetchUser, fetchUserByUsername } from '../services/UserService';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -15,7 +16,13 @@ const Cart = () => {
   const[order,setOrder] = useState([]);
   const [status, setStatus] = useState("");
   const [orderItems,setOrderItems]= useState([]);
-  const userId = sessionStorage.getItem('user_id');
+  const[username, setUsername] =useState(null);
+  const [user ,setUser] = useState(null);
+  //const userId = sessionStorage.getItem('user_id');
+  const usernameformstorage = localStorage.getItem('username') || 'Dilanka';
+  useEffect(()=>{
+    setUsername(usernameformstorage);
+  },[]);
   
   useEffect(() => {
     const cartTotal = cart.reduce((acc, item) => {
@@ -24,6 +31,18 @@ const Cart = () => {
     }, 0);
     setTotal(cartTotal);
   }, [cart, orderQuantities]);
+
+   useEffect(() => {
+        const getUserByusername = async () => {
+            const response = await fetchUserByUsername(username);
+            console.log("here in getbyUsername")
+            console.log(response)
+           setUser(response);
+        }
+
+        getUserByusername();
+    }, [username])
+
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
@@ -75,7 +94,7 @@ const Cart = () => {
       const data = {
         status: status,
         user: {
-          id: 11,
+          id: user.id,
         },
         orderItems: orderItems,
         orderTotal: total,
@@ -95,8 +114,9 @@ const Cart = () => {
 
 
   return (
+    
     <div className="cart">
-      <h2>Your Cart</h2>
+    <h4>{user && user.userName}'s Cart</h4>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -135,6 +155,7 @@ const Cart = () => {
       </Table>
       <div className='plaseOrder'><Button variant='primary' onClick={placeOrder}>Checkout</Button></div>
     </div>
+        
 
   );
 };

@@ -11,6 +11,18 @@ export const fetchUser= async (id)=>{
         console.log(error)
     }
 }
+export const fetchUserByUsername= async (userName)=>{
+    try {
+        const response= await axios.get("http://localhost:9001/open/Users/name/"+userName); 
+        console.log("here")
+        console.log(response);
+
+        return await response.data;
+    } catch (error) {
+        console.log("Error when ftetch book by username");
+        console.log(error)
+    }
+}
 export const fetchUsers= async ()=>{
     try {
         const response= await axios.get("http://localhost:9001/open/Users/"); 

@@ -9,7 +9,11 @@ import com.ijse.onlineBookStore.entity.User;
 
 @Service
 public interface UserService {
-    User createUser(User user);
-    User getUserById(Long id);
-      List<User> getAllUsers();
+  User createUser(User user);
+
+  User getUserById(Long id);
+
+  List<User> getAllUsers();
+
+  User getUserByUsername(String name);
 }

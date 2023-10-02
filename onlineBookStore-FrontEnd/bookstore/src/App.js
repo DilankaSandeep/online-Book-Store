@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import './App.scss'
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
@@ -12,6 +11,7 @@ import BooksbySubCategory from './pages/BooksbySubCategory';
 import AboutUs from './pages/AboutUs';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import ShippingDetails from './pages/ShippingDetails';
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
           <Route path='/AboutUs' element={<AboutUs />} />
           <Route path='/Cart' element={<Cart/>}/>
           <Route path='/Checkout' element={<Checkout/>}/>
+          <Route path='/ShippingDetails' element={<ShippingDetails/>}/>
           <Route path='/Business'element={<Books value={1}/>}/>
           <Route path='/Fiction'element={<Books value={2}/>}/>
           <Route path='/SchoolBook'element={<Books value={3}/>}/>

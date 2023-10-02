@@ -33,4 +33,11 @@ public class UserController {
         System.out.println("Here in getAllUsers in userController");
           return new ResponseEntity<List<User>>(users,HttpStatus.OK);
     }
+       @GetMapping("/open/Users/name/{name}")
+    private ResponseEntity<User> getUserByUsername(@PathVariable String name) {
+        User user = userService.getUserByUsername(name);
+        System.out.println("Here in getUserbyUSername");
+        System.out.println(user.getUserName());
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
 }
