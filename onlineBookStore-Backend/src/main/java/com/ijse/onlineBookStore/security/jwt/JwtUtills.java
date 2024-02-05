@@ -43,6 +43,7 @@ public Key key(){
 public  boolean validateJwtToken(String authtoken){
     try {
         Jwts.parserBuilder().setSigningKey(key()).build().parse(authtoken);
+        System.out.println("in validateJwtToke()");
         return true;
         
     } catch (MalformedJwtException e) {

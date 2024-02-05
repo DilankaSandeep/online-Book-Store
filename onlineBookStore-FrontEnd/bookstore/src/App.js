@@ -58,7 +58,7 @@ function App() {
           <Route path='/Novel/H' element={<BooksbySubCategory value={23}/>}/>
           <Route element={<ProtectedRoute />}>
             <Route path='/Checkout' element={<Checkout/>}/>
-          <Route path='/ShippingDetails' element={<ShippingDetails/>}/>
+            <Route path='/ShippingDetails' element={<ShippingDetails/>}/>
             </Route>
           </Route>
 

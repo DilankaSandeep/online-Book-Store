@@ -19,7 +19,7 @@ export const fetchUserByUsername= async (userName)=>{
 
         return await response.data;
     } catch (error) {
-        console.log("Error when ftetch book by username");
+        console.log("Error when ftetch user by username");
         console.log(error)
     }
 }

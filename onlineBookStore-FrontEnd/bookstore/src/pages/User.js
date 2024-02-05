@@ -104,16 +104,15 @@ const User = () => {
             setLogInUsername("")
             setLogInPassword("")
             localStorage.setItem('username', (logInusername));
-            sessionStorage.setItem('token',response.data.token);
-            sessionStorage.setItem('username', response.data.userName);
-            sessionStorage.setItem('user_id',response.data.id);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+            sessionStorage.setItem('token',response.data);
+            sessionStorage.setItem('username', logInusername);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`;
             window.alert(`Loged In as ${logInusername}`)
-
             navigate("/");
 
 
         } catch (error) {
+            console.log(error);
             setLogInError("Username or Password is wrong");
         }
     }
@@ -171,7 +170,7 @@ const User = () => {
                             <Form.Control type="password" placeholder='Enter Password' value={logInpassword} onChange={handleLogInPassword} />
                         </FloatingLabel>
 
-                        {error &&
+                        {logInError &&
                             <div className="text-danger mb-3">
                                 {logInError}
                             </div>

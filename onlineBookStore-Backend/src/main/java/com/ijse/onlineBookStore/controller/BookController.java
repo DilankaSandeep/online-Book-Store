@@ -66,7 +66,9 @@ public class BookController {
     @PutMapping("/open/books/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id,@RequestBody Book book){
         try {
+            System.out.println(book);
            Book updatedBook = bookService.updateBook(id, book);
+           System.out.println(updatedBook);
             return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

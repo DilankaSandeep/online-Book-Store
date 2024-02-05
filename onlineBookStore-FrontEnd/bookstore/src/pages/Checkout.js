@@ -7,9 +7,7 @@ import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { updateBook } from "../services/BookService";
 
-
-//const userId = sessionStorage.getItem('user_id');
-const usernameformstorage = localStorage.getItem('username') || 'Dilanka';
+const usernameformstorage = localStorage.getItem('username');
 
 
 const Checkout = () => {
@@ -39,33 +37,22 @@ const Checkout = () => {
         getOrder();
     }, [])
     const updatebookStore = async () => {
-        const updatedBookIds = [];
-        const updatedOrderItems = orderItems.map((item) => {
-          const bookId = item.book.id;
-          const updatedQuantity = item.book.qnty - item.quantity;
-          updatedBookIds.push(bookId);
-      
-          return {
-            bookId: bookId,
-            updatedQuantity: updatedQuantity,
-          };
+   
+        const updatedOrderItems = order.orderItems.map((item) => {
+          item.book.qnty = item.book.qnty - item.quantity;
+          return (item.book)
         });
       
         // Use Promise.all to update all books concurrently
         const updatePromises = updatedOrderItems.map(async (item) => {
-          const data = {
-            id: item.bookId,
-            qnty: item.updatedQuantity,
-          };
-      
-          return await updateBook(item.bookId, data);
+          return await updateBook(item.id, item);
         });
       
         try {
           await Promise.all(updatePromises);
       
           // All books updated successfully
-          // Now you can set the updatedOrderItems state or perform any other actions
+          //  set the updatedOrderItems state or perform any other actions
           setOrderItems(updatedOrderItems);
         } catch (error) {
           console.error("Error updating books:", error);

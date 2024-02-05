@@ -75,14 +75,9 @@ cd frontend
 npm install
 npm start
 
-Backend Setup:
-
-    Configure your database connection in the application.properties file.
-
-bash
 
 cd backend
-./mvnw spring-boot:run
+./mvn spring-boot:run
 
 Access the Application:
 

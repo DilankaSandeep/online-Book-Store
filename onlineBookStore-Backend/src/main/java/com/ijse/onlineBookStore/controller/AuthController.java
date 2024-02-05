@@ -39,7 +39,7 @@ public class AuthController {
     @PostMapping("/open/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         
-        if(userRepository.existsByEmail(user.getUserName())) {
+        if(userRepository.existsByUserName(user.getUserName())) {
             return ResponseEntity.badRequest().body("Username is already taken");
         }
 
@@ -60,11 +60,8 @@ public class AuthController {
     @PostMapping("/open/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
         Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
-
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt= utills.generateJwtToken(authentication);
-        System.out.println("im in AuthController");
         return ResponseEntity.ok(jwt);
 
     }

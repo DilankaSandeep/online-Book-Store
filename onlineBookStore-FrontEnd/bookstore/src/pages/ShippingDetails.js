@@ -19,9 +19,7 @@ const ShippingDetails = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("username");
-        sessionStorage.removeItem("user_id");
+
         window.location.href = "/";
         localStorage.removeItem('username');
     };

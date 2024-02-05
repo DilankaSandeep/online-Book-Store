@@ -34,12 +34,14 @@ public class AuthTokenFilter  extends OncePerRequestFilter{
             throws ServletException, IOException {
         try {
             String jwt = paresJwt(request);
+        
             if(jwt != null && jwtUtills.validateJwtToken(jwt)){
                 String username = jwtUtills.getUsernameFromJwtToken(jwt);
                 UserDetails userDetails= userDetailsService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken authentication= new UsernamePasswordAuthenticationToken(userDetails,null);
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                UsernamePasswordAuthenticationToken authenticationToken= new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                System.out.println("In AuthToken Filter" + "\n"+jwt);
             }
         }catch (Exception e){
             logger.error("Cannot set User Authenticaion :{}", e);

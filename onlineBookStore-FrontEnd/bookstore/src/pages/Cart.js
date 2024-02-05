@@ -18,10 +18,11 @@ const Cart = () => {
   const [orderItems,setOrderItems]= useState([]);
   const[username, setUsername] =useState(null);
   const [user ,setUser] = useState(null);
-  //const userId = sessionStorage.getItem('user_id');
-  const usernameformstorage = localStorage.getItem('username') || 'Dilanka';
+  const usernameformstorage = sessionStorage.getItem('username');
+
   useEffect(()=>{
     setUsername(usernameformstorage);
+     getUserByusername();
   },[]);
   
   useEffect(() => {
@@ -31,17 +32,12 @@ const Cart = () => {
     }, 0);
     setTotal(cartTotal);
   }, [cart, orderQuantities]);
-
-   useEffect(() => {
-        const getUserByusername = async () => {
-            const response = await fetchUserByUsername(username);
-            console.log("here in getbyUsername")
-            console.log(response)
-           setUser(response);
-        }
-
-        getUserByusername();
-    }, [username])
+  const getUserByusername = async () => {
+    const response = await fetchUserByUsername(usernameformstorage);
+    console.log("here in getbyUsername")
+    console.log(response)
+   setUser(response);
+}
 
 
   useEffect(() => {
@@ -81,6 +77,8 @@ const Cart = () => {
         book: {
           id: item.id,
           title: item.title,
+          author:item.author,
+          description:item.description,
           price: item.price,
           category:item.category,
           subCategory:item.subCategory,
@@ -90,24 +88,35 @@ const Cart = () => {
         },
         quantity: orderQuantities[item.id] || 1,
       }));
-    
-      const data = {
-        status: status,
-        user: {
-          id: user.id,
-        },
-        orderItems: orderItems,
-        orderTotal: total,
-      };
-    
-      const response = await createOrder(data);
-    
-      if (response) {
-        localStorage.setItem('order', JSON.stringify(response));
-        navigate("/Checkout");
-      } else {
-        navigate("/");
+      if(user != null){
+        const data = {
+          status: status,
+          user: {
+           id: user.id
+          },
+          orderItems: orderItems,
+          orderTotal: total,
+        };
+        const response = await createOrder(data);
+        if (response) {
+          localStorage.setItem('order', JSON.stringify(response));
+          navigate("/Checkout");
+        } else {
+          window.alert("Login First")
+          //navigate("/User");
+        }
+      }else{
+        window.alert("Please Log In First");
+        navigate("/User");
       }
+      
+      
+ 
+
+    
+
+    
+
     }
     
 
