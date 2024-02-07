@@ -35,7 +35,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book updateBook(Long id, Book book) {
         Book existBook= bookRepository.findById(id).orElse(null);
-        try {
             if(existBook!=null){
                 existBook.setTitle(book.getTitle());
                 existBook.setAuthor(book.getAuthor());
@@ -44,17 +43,15 @@ public class BookServiceImpl implements BookService {
                 existBook.setPrice(book.getPrice());
                 existBook.setSubCategory(book.getSubCategory());
                 existBook.setQnty(book.getQnty());
+                System.out.println(book.getTitle());
+                System.out.println(book.getQnty());
                 return bookRepository.save(existBook);
+         
             }else{
                 return null;
             }
             
-        } catch (Exception e) {
-           System.out.println(e);
-           e.printStackTrace();
-           return book;
-           
-        }
+       
      
     }
 

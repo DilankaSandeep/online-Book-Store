@@ -5,6 +5,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [orderQuantities, setOrderQuantities] = useState({});
 
   const addToCart = (product) => {
     const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -22,8 +23,21 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  const increaseOrderQuantity = (itemId) => {
+  
+    setOrderQuantities((prevOrderQuantities) => ({
+      ...prevOrderQuantities,
+      [itemId]: (prevOrderQuantities[itemId] || 1) + 1,
+    }));
+  };
+  const decreaseOrderQuantity = (itemId) => {
+    setOrderQuantities((prevOrderQuantities) => ({
+      ...prevOrderQuantities,
+      [itemId]: Math.max((prevOrderQuantities[itemId] || 0) - 1, 1), 
+    }));
+  };
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart,orderQuantities, addToCart, removeFromCart,increaseOrderQuantity,decreaseOrderQuantity }}>
       {children}
     </CartContext.Provider>
   );

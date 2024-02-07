@@ -48,8 +48,6 @@ export const fetchBooksBySubCategoery= async (subcategory_id)=>{
 export const updateBook= async (book_id,updatedBook)=>{
     try {
         const response= await axios.put("http://localhost:9001/open/books/"+book_id,updatedBook); 
-        console.log(response);
-
         return await response.data;
     } catch (error) {
         console.log("Error when update book");

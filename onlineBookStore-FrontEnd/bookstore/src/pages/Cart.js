@@ -3,7 +3,7 @@ import { useCart } from '../CartContex';
 import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
-import { createOrder } from '../services/CartService';
+
 import { useNavigate } from "react-router-dom";
 import { fetchUser, fetchUserByUsername } from '../services/UserService';
 
@@ -12,7 +12,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const { removeFromCart } = useCart();
   const [total, setTotal] =useState(0);
-  const [orderQuantities, setOrderQuantities] = useState({});
+  const {orderQuantities,increaseOrderQuantity,decreaseOrderQuantity} = useCart();
   const[order,setOrder] = useState([]);
   const [status, setStatus] = useState("");
   const [orderItems,setOrderItems]= useState([]);
@@ -20,48 +20,36 @@ const Cart = () => {
   const [user ,setUser] = useState(null);
   const usernameformstorage = sessionStorage.getItem('username');
 
-  useEffect(()=>{
-    setUsername(usernameformstorage);
-     getUserByusername();
-  },[]);
-  
-  useEffect(() => {
-    const cartTotal = cart.reduce((acc, item) => {
-      const orderQuantity = orderQuantities[item.id] || 1; 
-      return acc + item.price * orderQuantity;
-    }, 0);
-    setTotal(cartTotal);
-  }, [cart, orderQuantities]);
-  const getUserByusername = async () => {
-    const response = await fetchUserByUsername(usernameformstorage);
-    console.log("here in getbyUsername")
-    console.log(response)
-   setUser(response);
-}
-
-
-  useEffect(() => {
+    useEffect(() => {
+      setUsername(usernameformstorage);
+      getUserByusername();
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
   }, []);
-    const increaseOrderQuantity = (itemId) => {
-      setOrderQuantities((prevOrderQuantities) => ({
-        ...prevOrderQuantities,
-        [itemId]: (prevOrderQuantities[itemId] || 0) + 1,
-      }));
-    };
+
   
+  useEffect(() => {
+  
+    const cartTotal = cart.reduce((acc, item) => {
+      const orderQuantity = orderQuantities[item.id] || 1; 
+      return acc + item.price * orderQuantity;
+    }, 0);
+    setTotal(cartTotal);
 
-    const decreaseOrderQuantity = (itemId) => {
-      setOrderQuantities((prevOrderQuantities) => ({
-        ...prevOrderQuantities,
-        [itemId]: Math.max((prevOrderQuantities[itemId] || 0) - 1, 1), 
-      }));
-    };
+  }, [cart, orderQuantities]);
 
-    const placeOrder = async () => {
+useEffect(()=>{
+
+},orderQuantities)
+
+  const getUserByusername = async () => {
+    const response = await fetchUserByUsername(usernameformstorage);
+    setUser(response);
+}  
+
+    const placeOrder = () => {
       setStatus("pending");
        // Validate order quantities before placing the order
     const isOrderValid = cart.every((item) => {
@@ -97,31 +85,15 @@ const Cart = () => {
           orderItems: orderItems,
           orderTotal: total,
         };
-        const response = await createOrder(data);
-        if (response) {
-          localStorage.setItem('order', JSON.stringify(response));
+       
+          sessionStorage.setItem('order', JSON.stringify(data));
           navigate("/Checkout");
-        } else {
-          window.alert("Login First")
-          //navigate("/User");
-        }
+        
       }else{
         window.alert("Please Log In First");
         navigate("/User");
       }
-      
-      
- 
-
-    
-
-    
-
     }
-    
-
-
-
   return (
     
     <div className="cart">

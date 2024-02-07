@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table';
 import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { updateBook } from "../services/BookService";
+import { createOrder } from '../services/CartService';
 
 const usernameformstorage = localStorage.getItem('username');
 
@@ -28,8 +29,7 @@ const Checkout = () => {
     useEffect(() => {
         
         const getOrder = async () => {
-            const existingOrder = JSON.parse(localStorage.getItem('order')) || [];
-            console.log("here in jsssss");
+            const existingOrder = JSON.parse(sessionStorage.getItem('order'));
             setOrder(existingOrder);
             setUserId(existingOrder.user.id);
         }
@@ -62,11 +62,18 @@ const Checkout = () => {
       
 
 
-    const confirmOrder =()=>{
-        const updatedCart = [];
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-        updatebookStore();
-        navigate("/shippingDetails");
+    const confirmOrder = async ()=> {
+        const data = JSON.parse(sessionStorage.getItem('order'));
+        const response = await createOrder(data);
+        if (response) {
+            const updatedCart = [];
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+           // updatebookStore();
+            navigate("/shippingDetails");
+        } else {
+          window.alert("Error While placing order");
+        }
+
     }
 
     const editOrder=()=>{
@@ -84,7 +91,6 @@ const Checkout = () => {
                                 <thead>
                                     <tr>
                                         <th>NO</th>
-                                        <th>Order ID</th>
                                         <th>Product</th>
                                         <th>Price</th>
                                         <th>Category</th>
@@ -98,7 +104,6 @@ const Checkout = () => {
                                     {order.orderItems.map((item, index) => (
                                         <tr key={item.id}>
                                             <td>{index + 1}</td>
-                                            <td>{order.id}</td>
                                             <td>{<div>{item.book.title}</div>}{<div>{<img src={require(`../imges/${item.book.imageUrl}`)} height={40} width={25} alt={item.book.title} />}</div>}</td>
                                             <td>Rs.{item.book.price.toFixed(2)}</td>
                                             <td>Category: {item.book.category.categoryName}<div>subCategory: {item.book.subCategory.subCategoryName}</div></td>
